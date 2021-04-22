@@ -1,4 +1,4 @@
-import Downloads from "../lib/downloads";
+import Downloads from "./downloads";
 import Settings from "./settings";
 import Time from "./time";
 import Torrents from "./torrents";
