@@ -6,11 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "realdebrid",
+    "realdebrid api",
+    "realdebrid api ts",
+    "realdebrid api typescript"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/damienmillet/ts-realdebrid-api.git"
   },
-  "author": "",
+  "author": "damienmillet",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/damienmillet/ts-realdebrid-api/issues"
