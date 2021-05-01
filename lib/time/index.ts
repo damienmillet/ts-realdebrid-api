@@ -8,21 +8,27 @@ const Time = Api && {
     fetch(Api.queryUrl(path))
       .then((res) => Api.responseEngine(res))
       .then((res: RdResponse) => ({ time: res.text() }))
-      .then((res: timeData) => ({
-        data: res,
-        success: Api.success,
-        error: Api.error,
-      }))
+      .then(
+        (res: timeData) => ({
+          data: res,
+          success: Api.success,
+          error: Api.error,
+        }),
+        () => ({ success: Api.success, error: Api.error })
+      )
       .then((res: time) => res),
   getIso: () =>
     fetch(Api.queryUrl(path + `/iso`))
       .then((res) => Api.responseEngine(res))
       .then((res: RdResponse) => ({ time: res.text() }))
-      .then((res: timeIsoData) => ({
-        data: res,
-        success: Api.success,
-        error: Api.error,
-      }))
+      .then(
+        (res: timeIsoData) => ({
+          data: res,
+          success: Api.success,
+          error: Api.error,
+        }),
+        () => ({ success: Api.success, error: Api.error })
+      )
       .then((res: timeIso) => res),
 };
 

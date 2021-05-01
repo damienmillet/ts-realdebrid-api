@@ -27,11 +27,14 @@ const Unrestrict = Api && {
     })
       .then((res) => Api.responseEngine(res))
       .then((res: RdResponse) => res.json())
-      .then((res: checkData) => ({
-        data: res,
-        success: Api.success,
-        error: Api.error,
-      }))
+      .then(
+        (res: checkData) => ({
+          data: res,
+          success: Api.success,
+          error: Api.error,
+        }),
+        () => ({ success: Api.success, error: Api.error })
+      )
       .then((res: check) => res),
   link: (body: linkBody) =>
     fetch(Api.queryUrl(path + "/link"), {
@@ -41,11 +44,14 @@ const Unrestrict = Api && {
     })
       .then((res) => Api.responseEngine(res))
       .then((res: RdResponse) => res.json())
-      .then((res: checkData) => ({
-        data: res,
-        success: Api.success,
-        error: Api.error,
-      }))
+      .then(
+        (res: checkData) => ({
+          data: res,
+          success: Api.success,
+          error: Api.error,
+        }),
+        () => ({ success: Api.success, error: Api.error })
+      )
       .then((res: check) => res),
   folder: (body: folderBody) =>
     fetch(Api.queryUrl(path + "/folder"), {
@@ -55,11 +61,14 @@ const Unrestrict = Api && {
     })
       .then((res) => Api.responseEngine(res))
       .then((res: RdResponse) => res.json())
-      .then((res: folderData) => ({
-        data: res,
-        success: Api.success,
-        error: Api.error,
-      }))
+      .then(
+        (res: folderData) => ({
+          data: res,
+          success: Api.success,
+          error: Api.error,
+        }),
+        () => ({ success: Api.success, error: Api.error })
+      )
       .then((res: folder) => res),
   // * a faire
   containerFile: (file: File) =>
@@ -70,11 +79,14 @@ const Unrestrict = Api && {
     })
       .then((res) => Api.responseEngine(res))
       .then((res: RdResponse) => res.json())
-      .then((res: containerFileData) => ({
-        data: res,
-        success: Api.success,
-        error: Api.error,
-      }))
+      .then(
+        (res: containerFileData) => ({
+          data: res,
+          success: Api.success,
+          error: Api.error,
+        }),
+        () => ({ success: Api.success, error: Api.error })
+      )
       .then((res: containerFile) => res),
 
   containerLink: (body: containerLinkBody) =>
@@ -85,11 +97,14 @@ const Unrestrict = Api && {
     })
       .then((res) => Api.responseEngine(res))
       .then((res: RdResponse) => res.json())
-      .then((res: containerLinkData) => ({
-        data: res,
-        success: Api.success,
-        error: Api.error,
-      }))
+      .then(
+        (res: containerLinkData) => ({
+          data: res,
+          success: Api.success,
+          error: Api.error,
+        }),
+        () => ({ success: Api.success, error: Api.error })
+      )
       .then((res: containerLink) => res),
 };
 

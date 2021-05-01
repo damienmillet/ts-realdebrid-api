@@ -8,11 +8,14 @@ const User = Api && {
     fetch(Api.queryUrl(path), { headers: Api.headers })
       .then((res) => Api.responseEngine(res))
       .then((res: RdResponse) => res.json())
-      .then((res: userData) => ({
-        data: res,
-        success: Api.success,
-        error: Api.error,
-      }))
+      .then(
+        (res: userData) => ({
+          data: res,
+          success: Api.success,
+          error: Api.error,
+        }),
+        () => ({ success: Api.success, error: Api.error })
+      )
       .then((res: user) => res),
 };
 

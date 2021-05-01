@@ -25,11 +25,14 @@ const Torrents = Api && {
     })
       .then((res) => Api.responseEngine(res))
       .then((res: RdResponse) => res.json())
-      .then((res: torrentsData) => ({
-        data: res,
-        success: Api.success,
-        error: Api.error,
-      }))
+      .then(
+        (res: torrentsData) => ({
+          data: res,
+          success: Api.success,
+          error: Api.error,
+        }),
+        () => ({ success: Api.success, error: Api.error })
+      )
       .then((res: torrents) => res),
 
   info: (id: string | string[] | number) =>
@@ -38,11 +41,14 @@ const Torrents = Api && {
     })
       .then((res) => Api.responseEngine(res))
       .then((res: RdResponse) => res.json())
-      .then((res: torrentData) => ({
-        data: res,
-        success: Api.success,
-        error: Api.error,
-      }))
+      .then(
+        (res: torrentData) => ({
+          data: res,
+          success: Api.success,
+          error: Api.error,
+        }),
+        () => ({ success: Api.success, error: Api.error })
+      )
       .then((res: torrent) => res),
 
   activeCount: () =>
@@ -51,11 +57,14 @@ const Torrents = Api && {
     })
       .then((res) => Api.responseEngine(res))
       .then((res: RdResponse) => res.json())
-      .then((res: activeCountData) => ({
-        data: res,
-        success: Api.success,
-        error: Api.error,
-      }))
+      .then(
+        (res: activeCountData) => ({
+          data: res,
+          success: Api.success,
+          error: Api.error,
+        }),
+        () => ({ success: Api.success, error: Api.error })
+      )
       .then((res: activeCount) => res),
 
   availableHosts: () =>
@@ -64,11 +73,14 @@ const Torrents = Api && {
     })
       .then((res) => Api.responseEngine(res))
       .then((res: RdResponse) => res.json())
-      .then((res: availableHostsData) => ({
-        data: res,
-        success: Api.success,
-        error: Api.error,
-      }))
+      .then(
+        (res: availableHostsData) => ({
+          data: res,
+          success: Api.success,
+          error: Api.error,
+        }),
+        () => ({ success: Api.success, error: Api.error })
+      )
       .then((res: availableHosts) => res),
 
   addTorrent: () =>
@@ -79,11 +91,14 @@ const Torrents = Api && {
     })
       .then((res) => Api.responseEngine(res))
       .then((res: RdResponse) => res.json())
-      .then((res: addTorrentData) => ({
-        data: res,
-        success: Api.success,
-        error: Api.error,
-      }))
+      .then(
+        (res: addTorrentData) => ({
+          data: res,
+          success: Api.success,
+          error: Api.error,
+        }),
+        () => ({ success: Api.success, error: Api.error })
+      )
       .then((res: addTorrent) => res),
 
   addMagnet: (body: addMagnetBody) =>
@@ -95,11 +110,14 @@ const Torrents = Api && {
     })
       .then((res) => Api.responseEngine(res))
       .then((res: RdResponse) => res.json())
-      .then((res: addMagnetData) => ({
-        data: res,
-        success: Api.success,
-        error: Api.error,
-      }))
+      .then(
+        (res: addMagnetData) => ({
+          data: res,
+          success: Api.success,
+          error: Api.error,
+        }),
+        () => ({ success: Api.success, error: Api.error })
+      )
       .then((res: addMagnet) => res),
 };
 

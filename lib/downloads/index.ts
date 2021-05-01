@@ -9,11 +9,14 @@ const Downloads = Api && {
     fetch(Api.queryUrl(path, params), { headers: Api.headers })
       .then((res) => Api.responseEngine(res))
       .then((res: RdResponse) => res.json())
-      .then((res: downloadsData) => ({
-        data: res,
-        success: Api.success,
-        error: Api.error,
-      }))
+      .then(
+        (res: downloadsData) => ({
+          data: res,
+          success: Api.success,
+          error: Api.error,
+        }),
+        () => ({ success: Api.success, error: Api.error })
+      )
       .then((res: downloads) => res),
   delete: (id: string | string[] | number) =>
     fetch(Api.queryUrl(path + id), {
@@ -22,11 +25,14 @@ const Downloads = Api && {
     })
       .then((res) => Api.responseEngine(res))
       .then((res: RdResponse) => res.json())
-      .then((res: unknown) => ({
-        data: res,
-        success: Api.success,
-        error: Api.error,
-      }))
+      .then(
+        (res: unknown) => ({
+          data: res,
+          success: Api.success,
+          error: Api.error,
+        }),
+        () => ({ success: Api.success, error: Api.error })
+      )
       .then((res: deleteId) => res),
 };
 
