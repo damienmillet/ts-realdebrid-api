@@ -1,4 +1,4 @@
-import Api, { RdResponse } from "../api";
+import Api from "../api";
 import { time, timeData, timeIso, timeIsoData } from "./type.return";
 
 const path = "/time";
@@ -7,7 +7,7 @@ const Time = Api && {
   get: () =>
     fetch(Api.queryUrl(path))
       .then((res) => Api.responseEngine(res))
-      .then((res: RdResponse) => ({ time: res.text() }))
+      .then((res: Response) => ({ time: res.text() }))
       .then(
         (res: timeData) => ({
           data: res,
@@ -20,7 +20,7 @@ const Time = Api && {
   getIso: () =>
     fetch(Api.queryUrl(path + `/iso`))
       .then((res) => Api.responseEngine(res))
-      .then((res: RdResponse) => ({ time: res.text() }))
+      .then((res: Response) => ({ time: res.text() }))
       .then(
         (res: timeIsoData) => ({
           data: res,

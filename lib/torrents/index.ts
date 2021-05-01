@@ -1,4 +1,4 @@
-import Api, { RdResponse } from "../api";
+import Api from "../api";
 import { addMagnetBody } from "./type.body";
 import { torrentsParams } from "./type.params";
 import {
@@ -24,7 +24,7 @@ const Torrents = Api && {
       headers: Api.headers,
     })
       .then((res) => Api.responseEngine(res))
-      .then((res: RdResponse) => res.json())
+      .then((res: Response) => res.json())
       .then(
         (res: torrentsData) => ({
           data: res,
@@ -40,7 +40,7 @@ const Torrents = Api && {
       headers: Api.headers,
     })
       .then((res) => Api.responseEngine(res))
-      .then((res: RdResponse) => res.json())
+      .then((res: Response) => res.json())
       .then(
         (res: torrentData) => ({
           data: res,
@@ -56,7 +56,7 @@ const Torrents = Api && {
       headers: Api.headers,
     })
       .then((res) => Api.responseEngine(res))
-      .then((res: RdResponse) => res.json())
+      .then((res: Response) => res.json())
       .then(
         (res: activeCountData) => ({
           data: res,
@@ -72,7 +72,7 @@ const Torrents = Api && {
       headers: Api.headers,
     })
       .then((res) => Api.responseEngine(res))
-      .then((res: RdResponse) => res.json())
+      .then((res: Response) => res.json())
       .then(
         (res: availableHostsData) => ({
           data: res,
@@ -90,7 +90,7 @@ const Torrents = Api && {
       headers: Api.headers,
     })
       .then((res) => Api.responseEngine(res))
-      .then((res: RdResponse) => res.json())
+      .then((res: Response) => res.json())
       .then(
         (res: addTorrentData) => ({
           data: res,
@@ -109,7 +109,7 @@ const Torrents = Api && {
       body: new URLSearchParams(body),
     })
       .then((res) => Api.responseEngine(res))
-      .then((res: RdResponse) => res.json())
+      .then((res: Response) => res.json())
       .then(
         (res: addMagnetData) => ({
           data: res,

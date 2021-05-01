@@ -1,4 +1,4 @@
-import Api, { RdResponse } from "../api";
+import Api from "../api";
 import { downloadsParams } from "./type.params";
 import { deleteId, downloads, downloadsData } from "./type.return";
 
@@ -8,7 +8,7 @@ const Downloads = Api && {
   get: (params: downloadsParams) =>
     fetch(Api.queryUrl(path, params), { headers: Api.headers })
       .then((res) => Api.responseEngine(res))
-      .then((res: RdResponse) => res.json())
+      .then((res: Response) => res.json())
       .then(
         (res: downloadsData) => ({
           data: res,
@@ -24,7 +24,7 @@ const Downloads = Api && {
       headers: Api.headers,
     })
       .then((res) => Api.responseEngine(res))
-      .then((res: RdResponse) => res.json())
+      .then((res: Response) => res.json())
       .then(
         (res: unknown) => ({
           data: res,

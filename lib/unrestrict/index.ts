@@ -1,4 +1,4 @@
-import Api, { RdResponse } from "../api";
+import Api from "../api";
 import {
   checkBody,
   containerLinkBody,
@@ -26,7 +26,7 @@ const Unrestrict = Api && {
       body: new URLSearchParams(body),
     })
       .then((res) => Api.responseEngine(res))
-      .then((res: RdResponse) => res.json())
+      .then((res: Response) => res.json())
       .then(
         (res: checkData) => ({
           data: res,
@@ -43,7 +43,7 @@ const Unrestrict = Api && {
       body: new URLSearchParams(body),
     })
       .then((res) => Api.responseEngine(res))
-      .then((res: RdResponse) => res.json())
+      .then((res: Response) => res.json())
       .then(
         (res: checkData) => ({
           data: res,
@@ -60,7 +60,7 @@ const Unrestrict = Api && {
       body: new URLSearchParams(body),
     })
       .then((res) => Api.responseEngine(res))
-      .then((res: RdResponse) => res.json())
+      .then((res: Response) => res.json())
       .then(
         (res: folderData) => ({
           data: res,
@@ -78,7 +78,7 @@ const Unrestrict = Api && {
       body: file,
     })
       .then((res) => Api.responseEngine(res))
-      .then((res: RdResponse) => res.json())
+      .then((res: Response) => res.json())
       .then(
         (res: containerFileData) => ({
           data: res,
@@ -96,7 +96,7 @@ const Unrestrict = Api && {
       body: new URLSearchParams(body),
     })
       .then((res) => Api.responseEngine(res))
-      .then((res: RdResponse) => res.json())
+      .then((res: Response) => res.json())
       .then(
         (res: containerLinkData) => ({
           data: res,

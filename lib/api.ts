@@ -21,10 +21,6 @@ type api = {
   responseEngine: CallableFunction;
 };
 
-export type RdResponse = Response & {
-  counter?: number;
-};
-
 const Api: api = {
   baseUrl: "https://api.real-debrid.com/rest/1.0",
   headers: new Headers({
@@ -37,7 +33,7 @@ const Api: api = {
     params && (url.search = new URLSearchParams(stringify(params)).toString());
     return url.toString();
   },
-  responseEngine: (res: RdResponse) => {
+  responseEngine: (res: Response) => {
     Api.success = res.ok;
     Api.error =
       res.status <= 200 && res.status > 300
