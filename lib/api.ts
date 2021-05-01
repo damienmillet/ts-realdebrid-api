@@ -7,7 +7,6 @@ export type response<T> = {
     code?: number;
     message?: string;
   };
-  counter?: number;
 };
 
 type api = {
@@ -18,7 +17,6 @@ type api = {
     code?: number;
     message?: string;
   };
-  counter?: number;
   queryUrl: CallableFunction;
   responseEngine: CallableFunction;
 };
@@ -48,7 +46,6 @@ const Api: api = {
             message: res.statusText,
           }
         : undefined;
-    Api.counter = res.counter;
     return res;
   },
 };

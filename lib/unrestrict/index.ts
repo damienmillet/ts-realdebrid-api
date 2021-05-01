@@ -31,7 +31,6 @@ const Unrestrict = Api && {
         data: res,
         success: Api.success,
         error: Api.error,
-        counter: Api.counter,
       }))
       .then((res: check) => res),
   link: (body: linkBody) =>
@@ -46,7 +45,6 @@ const Unrestrict = Api && {
         data: res,
         success: Api.success,
         error: Api.error,
-        counter: Api.counter,
       }))
       .then((res: check) => res),
   folder: (body: folderBody) =>
@@ -61,7 +59,6 @@ const Unrestrict = Api && {
         data: res,
         success: Api.success,
         error: Api.error,
-        counter: Api.counter,
       }))
       .then((res: folder) => res),
   // * a faire
@@ -77,7 +74,6 @@ const Unrestrict = Api && {
         data: res,
         success: Api.success,
         error: Api.error,
-        counter: Api.counter,
       }))
       .then((res: containerFile) => res),
 
@@ -93,7 +89,6 @@ const Unrestrict = Api && {
         data: res,
         success: Api.success,
         error: Api.error,
-        counter: Api.counter,
       }))
       .then((res: containerLink) => res),
 };

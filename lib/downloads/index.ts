@@ -13,7 +13,6 @@ const Downloads = Api && {
         data: res,
         success: Api.success,
         error: Api.error,
-        counter: Api.counter,
       }))
       .then((res: downloads) => res),
   delete: (id: string | string[] | number) =>
@@ -27,7 +26,6 @@ const Downloads = Api && {
         data: res,
         success: Api.success,
         error: Api.error,
-        counter: Api.counter,
       }))
       .then((res: deleteId) => res),
 };

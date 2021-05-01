@@ -29,7 +29,6 @@ const Torrents = Api && {
         data: res,
         success: Api.success,
         error: Api.error,
-        counter: Api.counter,
       }))
       .then((res: torrents) => res),
 
@@ -43,7 +42,6 @@ const Torrents = Api && {
         data: res,
         success: Api.success,
         error: Api.error,
-        counter: Api.counter,
       }))
       .then((res: torrent) => res),
 
@@ -57,7 +55,6 @@ const Torrents = Api && {
         data: res,
         success: Api.success,
         error: Api.error,
-        counter: Api.counter,
       }))
       .then((res: activeCount) => res),
 
@@ -71,7 +68,6 @@ const Torrents = Api && {
         data: res,
         success: Api.success,
         error: Api.error,
-        counter: Api.counter,
       }))
       .then((res: availableHosts) => res),
 
@@ -87,7 +83,6 @@ const Torrents = Api && {
         data: res,
         success: Api.success,
         error: Api.error,
-        counter: Api.counter,
       }))
       .then((res: addTorrent) => res),
 
@@ -104,7 +99,6 @@ const Torrents = Api && {
         data: res,
         success: Api.success,
         error: Api.error,
-        counter: Api.counter,
       }))
       .then((res: addMagnet) => res),
 };

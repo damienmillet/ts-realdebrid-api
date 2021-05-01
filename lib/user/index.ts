@@ -12,7 +12,6 @@ const User = Api && {
         data: res,
         success: Api.success,
         error: Api.error,
-        counter: Api.counter,
       }))
       .then((res: user) => res),
 };

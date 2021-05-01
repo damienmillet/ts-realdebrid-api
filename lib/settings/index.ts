@@ -17,7 +17,6 @@ const Settings = Api && {
         data: res,
         success: Api.success,
         error: Api.error,
-        counter: Api.counter,
       }))
       .then((res: convertPoints) => res),
 };
