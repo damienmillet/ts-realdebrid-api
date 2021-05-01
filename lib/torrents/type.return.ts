@@ -1,4 +1,7 @@
-export type activeCount = {
+import Torrents from ".";
+import { response } from "../api";
+
+export type activeCountData = {
   nb: number; // Number of currently active torrents
   limit: number; // Maximum number of active torrents you can have
 };
@@ -8,7 +11,7 @@ export type files = {
   bytes: number;
   selected: number; // 0 or 1
 };
-export type torrent = {
+export type torrentData = {
   id: string;
   filename: string;
   hash: string; // SHA1 Hash of the torrent
@@ -24,13 +27,25 @@ export type torrent = {
   speed: number; // !! Only present in "downloading", "compressing", "uploading" status
   seeders: number; // !! Only present in "downloading", "magnet_conversion" status
 };
-export type torrents = torrent[];
+export type torrentsData = torrent[];
 
-export type availableHosts = {
+export type availableHostsData = {
   host: string; // Host main domain
   max_file_size: number; // Max split size possible
 };
-export type addTorrent = {
+export type addTorrentData = {
   id: string;
   uri: string; // URL of the created ressource
 };
+export type addMagnetData = {
+  id: string;
+  uri: string; // URL of the created ressource
+};
+
+export type activeCount = response<activeCountData>;
+
+export type addTorrent = response<addTorrentData>;
+export type addMagnet = response<addMagnetData>;
+export type availableHosts = response<availableHostsData>;
+export type torrent = response<torrentData>;
+export type torrents = response<torrentsData>;

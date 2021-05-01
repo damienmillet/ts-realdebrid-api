@@ -1,4 +1,6 @@
-export type check = {
+import { response } from "../api";
+
+export type checkData = {
   host: string; // Host main domain
   link: string;
   filename: string;
@@ -6,14 +8,14 @@ export type check = {
   supported: number;
 };
 
-export type linkAlter = {
+export type linkAlterData = {
   id: string;
   filename: string;
   download: string;
   type: string;
 };
 
-export type link = {
+export type linkData = {
   id: string;
   filename: string;
   mimeType: string; // Mime Type of the file, guessed by the file extension
@@ -27,3 +29,14 @@ export type link = {
   type: string; // Type of the file (in general, its quality)
   alternative: linkAlter[];
 };
+
+export type folderData = string[];
+export type containerFileData = string[];
+export type containerLinkData = string[];
+
+export type check = response<checkData>;
+export type linkAlter = response<linkAlterData>;
+export type link = response<linkData>;
+export type folder = response<folderData>;
+export type containerFile = response<containerFileData>;
+export type containerLink = response<containerLinkData>;

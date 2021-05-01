@@ -1,5 +1,5 @@
-import Api from "../api";
-import { convertPoints } from "./type.return";
+import Api, { RdResponse } from "../api";
+import { convertPoints, convertPointsData } from "./type.return";
 
 const path = "/settings";
 
@@ -11,7 +11,14 @@ const Settings = Api && {
         headers: Api.headers,
       })
     )
-      .then((res) => res.json())
+      .then((res) => Api.responseEngine(res))
+      .then((res: RdResponse) => res.json())
+      .then((res: convertPointsData) => ({
+        data: res,
+        success: Api.success,
+        error: Api.error,
+        counter: Api.counter,
+      }))
       .then((res: convertPoints) => res),
 };
 

@@ -1,12 +1,19 @@
-import Api from "../api";
+import Api, { RdResponse } from "../api";
 import { addMagnetBody } from "./type.body";
 import { torrentsParams } from "./type.params";
 import {
   activeCount,
+  activeCountData,
+  addMagnet,
+  addMagnetData,
   addTorrent,
+  addTorrentData,
   availableHosts,
+  availableHostsData,
   torrent,
+  torrentData,
   torrents,
+  torrentsData,
 } from "./type.return";
 
 const path = "/torrents";
@@ -16,28 +23,56 @@ const Torrents = Api && {
     fetch(Api.queryUrl(path, params), {
       headers: Api.headers,
     })
-      .then((res) => res.json())
+      .then((res) => Api.responseEngine(res))
+      .then((res: RdResponse) => res.json())
+      .then((res: torrentsData) => ({
+        data: res,
+        success: Api.success,
+        error: Api.error,
+        counter: Api.counter,
+      }))
       .then((res: torrents) => res),
 
   info: (id: string | string[] | number) =>
     fetch(Api.queryUrl(path + "/info/" + id), {
       headers: Api.headers,
     })
-      .then((res) => res.json())
+      .then((res) => Api.responseEngine(res))
+      .then((res: RdResponse) => res.json())
+      .then((res: torrentData) => ({
+        data: res,
+        success: Api.success,
+        error: Api.error,
+        counter: Api.counter,
+      }))
       .then((res: torrent) => res),
 
   activeCount: () =>
     fetch(Api.queryUrl(path + "/activeCount"), {
       headers: Api.headers,
     })
-      .then((res) => res.json())
+      .then((res) => Api.responseEngine(res))
+      .then((res: RdResponse) => res.json())
+      .then((res: activeCountData) => ({
+        data: res,
+        success: Api.success,
+        error: Api.error,
+        counter: Api.counter,
+      }))
       .then((res: activeCount) => res),
 
   availableHosts: () =>
     fetch(Api.queryUrl(path + "/availableHosts"), {
       headers: Api.headers,
     })
-      .then((res) => res.json())
+      .then((res) => Api.responseEngine(res))
+      .then((res: RdResponse) => res.json())
+      .then((res: availableHostsData) => ({
+        data: res,
+        success: Api.success,
+        error: Api.error,
+        counter: Api.counter,
+      }))
       .then((res: availableHosts) => res),
 
   addTorrent: () =>
@@ -46,7 +81,14 @@ const Torrents = Api && {
       method: "PUT",
       headers: Api.headers,
     })
-      .then((res) => res.json())
+      .then((res) => Api.responseEngine(res))
+      .then((res: RdResponse) => res.json())
+      .then((res: addTorrentData) => ({
+        data: res,
+        success: Api.success,
+        error: Api.error,
+        counter: Api.counter,
+      }))
       .then((res: addTorrent) => res),
 
   addMagnet: (body: addMagnetBody) =>
@@ -56,8 +98,15 @@ const Torrents = Api && {
       headers: Api.headers,
       body: new URLSearchParams(body),
     })
-      .then((res) => res.json())
-      .then((res: addTorrent) => res),
+      .then((res) => Api.responseEngine(res))
+      .then((res: RdResponse) => res.json())
+      .then((res: addMagnetData) => ({
+        data: res,
+        success: Api.success,
+        error: Api.error,
+        counter: Api.counter,
+      }))
+      .then((res: addMagnet) => res),
 };
 
 export default Torrents;

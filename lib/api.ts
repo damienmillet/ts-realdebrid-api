@@ -1,6 +1,33 @@
 import { stringify } from "querystring";
 
-const Api = {
+export type response<T> = {
+  data?: T;
+  success?: boolean;
+  error?: {
+    code?: number;
+    message?: string;
+  };
+  counter?: number;
+};
+
+type api = {
+  baseUrl: string;
+  headers: Headers;
+  success?: boolean;
+  error?: {
+    code?: number;
+    message?: string;
+  };
+  counter?: number;
+  queryUrl: CallableFunction;
+  responseEngine: CallableFunction;
+};
+
+export type RdResponse = Response & {
+  counter?: number;
+};
+
+const Api: api = {
   baseUrl: "https://api.real-debrid.com/rest/1.0",
   headers: new Headers({
     Authorization: `Bearer ${process.env.REALDEBRID_API}`,
@@ -11,6 +38,18 @@ const Api = {
     const url = new URL(Api.baseUrl + uri);
     params && (url.search = new URLSearchParams(stringify(params)).toString());
     return url.toString();
+  },
+  responseEngine: (res: RdResponse) => {
+    Api.success = res.ok;
+    Api.error =
+      res.status <= 200 && res.status > 300
+        ? {
+            code: res.status,
+            message: res.statusText,
+          }
+        : undefined;
+    Api.counter = res.counter;
+    return res;
   },
 };
 export default Api;

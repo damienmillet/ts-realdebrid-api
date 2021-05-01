@@ -1,11 +1,20 @@
-import Api from "../api";
+import Api, { RdResponse } from "../api";
 import {
   checkBody,
   containerLinkBody,
   folderBody,
   linkBody,
 } from "./type.body";
-import { check } from "./type.return";
+import {
+  check,
+  checkData,
+  containerFile,
+  containerFileData,
+  containerLink,
+  containerLinkData,
+  folder,
+  folderData,
+} from "./type.return";
 
 const path = "/unrestrict";
 
@@ -16,26 +25,45 @@ const Unrestrict = Api && {
       headers: Api.headers,
       body: new URLSearchParams(body),
     })
-      .then((res) => res.json())
+      .then((res) => Api.responseEngine(res))
+      .then((res: RdResponse) => res.json())
+      .then((res: checkData) => ({
+        data: res,
+        success: Api.success,
+        error: Api.error,
+        counter: Api.counter,
+      }))
       .then((res: check) => res),
-
   link: (body: linkBody) =>
     fetch(Api.queryUrl(path + "/link"), {
       method: "POST",
       headers: Api.headers,
       body: new URLSearchParams(body),
     })
-      .then((res) => res.json())
+      .then((res) => Api.responseEngine(res))
+      .then((res: RdResponse) => res.json())
+      .then((res: checkData) => ({
+        data: res,
+        success: Api.success,
+        error: Api.error,
+        counter: Api.counter,
+      }))
       .then((res: check) => res),
-
   folder: (body: folderBody) =>
     fetch(Api.queryUrl(path + "/folder"), {
       method: "POST",
       headers: Api.headers,
       body: new URLSearchParams(body),
     })
-      .then((res) => res.json())
-      .then((res: string[]) => res),
+      .then((res) => Api.responseEngine(res))
+      .then((res: RdResponse) => res.json())
+      .then((res: folderData) => ({
+        data: res,
+        success: Api.success,
+        error: Api.error,
+        counter: Api.counter,
+      }))
+      .then((res: folder) => res),
   // * a faire
   containerFile: (file: File) =>
     fetch(Api.queryUrl(path + "/containerFile"), {
@@ -43,8 +71,15 @@ const Unrestrict = Api && {
       headers: Api.headers,
       body: file,
     })
-      .then((res) => res.json())
-      .then((res: string[]) => res),
+      .then((res) => Api.responseEngine(res))
+      .then((res: RdResponse) => res.json())
+      .then((res: containerFileData) => ({
+        data: res,
+        success: Api.success,
+        error: Api.error,
+        counter: Api.counter,
+      }))
+      .then((res: containerFile) => res),
 
   containerLink: (body: containerLinkBody) =>
     fetch(Api.queryUrl(path + "/containerFile"), {
@@ -52,8 +87,15 @@ const Unrestrict = Api && {
       headers: Api.headers,
       body: new URLSearchParams(body),
     })
-      .then((res) => res.json())
-      .then((res: string[]) => res),
+      .then((res) => Api.responseEngine(res))
+      .then((res: RdResponse) => res.json())
+      .then((res: containerLinkData) => ({
+        data: res,
+        success: Api.success,
+        error: Api.error,
+        counter: Api.counter,
+      }))
+      .then((res: containerLink) => res),
 };
 
 export default Unrestrict;

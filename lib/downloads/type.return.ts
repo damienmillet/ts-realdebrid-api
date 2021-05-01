@@ -1,3 +1,5 @@
+import { response } from "../api";
+
 export type download = {
   id: string;
   filename: string;
@@ -11,4 +13,8 @@ export type download = {
   streamable: number;
   generated: string;
 };
-export type downloads = download[];
+export type downloadsData = download[];
+
+export type downloads = response<downloadsData>;
+
+export type deleteId = response<unknown>;
