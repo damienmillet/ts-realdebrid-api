@@ -49,3 +49,4 @@ export type addMagnet = response<addMagnetData>;
 export type availableHosts = response<availableHostsData>;
 export type torrent = response<torrentData>;
 export type torrents = response<torrentsData>;
+export type deleteId = response<unknown>;

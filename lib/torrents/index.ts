@@ -10,6 +10,7 @@ import {
   addTorrentData,
   availableHosts,
   availableHostsData,
+  deleteId,
   torrent,
   torrentData,
   torrents,
@@ -119,6 +120,23 @@ const Torrents = Api && {
         () => ({ success: Api.success, error: Api.error })
       )
       .then((res: addMagnet) => res),
+
+  delete: (id: string | string[] | number) =>
+    fetch(Api.queryUrl(path + "/delete/" + id), {
+      method: "DELETE",
+      headers: Api.headers,
+    })
+      .then((res) => Api.responseEngine(res))
+      .then((res: Response) => res.json())
+      .then(
+        (res: unknown) => ({
+          data: res,
+          success: Api.success,
+          error: Api.error,
+        }),
+        () => ({ success: Api.success, error: Api.error })
+      )
+      .then((res: deleteId) => res),
 };
 
 export default Torrents;
