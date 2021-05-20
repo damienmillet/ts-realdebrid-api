@@ -8,6 +8,7 @@ export type download = {
   link: string;
   host: string;
   host_icon: string;
+  type?: string;
   chunks: number;
   download: string;
   streamable: number;
