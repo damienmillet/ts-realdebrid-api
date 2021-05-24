@@ -85,7 +85,6 @@ const Torrents = Api && {
       .then((res: availableHosts) => res),
 
   addTorrent: () =>
-    // TODO
     fetch(Api.queryUrl(path + "/addTorrent"), {
       method: "PUT",
       headers: Api.headers,
@@ -103,8 +102,7 @@ const Torrents = Api && {
       .then((res: addTorrent) => res),
 
   addMagnet: (body: addMagnetBody) =>
-    // TODO
-    fetch(Api.queryUrl(path + "/addTorrent"), {
+    fetch(Api.queryUrl(path + "/addMagnet"), {
       method: "POST",
       headers: Api.headers,
       body: new URLSearchParams(body),
