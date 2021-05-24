@@ -4,3 +4,7 @@ export type torrentsParams = {
   limit?: string | string[] | number; // Entries returned per page / request (must be within 0 and 100, default: 50)
   filter?: string | string[] | string; // "active", list active torrents first
 };
+
+export type addTorrentParams = {
+  get?: string;
+};

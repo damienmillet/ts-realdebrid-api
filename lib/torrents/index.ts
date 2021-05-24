@@ -1,6 +1,6 @@
 import Api from "../api";
-import { addMagnetBody } from "./type.body";
-import { torrentsParams } from "./type.params";
+import { addMagnetBody, addTorrentBody } from "./type.body";
+import { addTorrentParams, torrentsParams } from "./type.params";
 import {
   activeCount,
   activeCountData,
@@ -84,10 +84,11 @@ const Torrents = Api && {
       )
       .then((res: availableHosts) => res),
 
-  addTorrent: () =>
-    fetch(Api.queryUrl(path + "/addTorrent"), {
+  addTorrent: (params: addTorrentParams, body: addTorrentBody) =>
+    fetch(Api.queryUrl(path + "/addTorrent", params), {
       method: "PUT",
       headers: Api.headers,
+      body: body,
     })
       .then((res) => Api.responseEngine(res))
       .then((res: Response) => res.json())

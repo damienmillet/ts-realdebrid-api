@@ -3,6 +3,4 @@ export type addMagnetBody = {
   host?: string;
 };
 
-export type addTorrentBody = {
-  get?: string;
-};
+export type addTorrentBody = File;
