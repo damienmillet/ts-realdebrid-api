@@ -14,6 +14,8 @@ import {
   containerLinkData,
   folder,
   folderData,
+  link,
+  linkData,
 } from "./type.return";
 
 const path = "/unrestrict";
@@ -45,14 +47,14 @@ const Unrestrict = Api && {
       .then((res) => Api.responseEngine(res))
       .then((res: Response) => res.json())
       .then(
-        (res: checkData) => ({
+        (res: linkData) => ({
           data: res,
           success: Api.success,
           error: Api.error,
         }),
         () => ({ success: Api.success, error: Api.error })
       )
-      .then((res: check) => res),
+      .then((res: link) => res),
   folder: (body: folderBody) =>
     fetch(Api.queryUrl(path + "/folder"), {
       method: "POST",
@@ -70,7 +72,7 @@ const Unrestrict = Api && {
         () => ({ success: Api.success, error: Api.error })
       )
       .then((res: folder) => res),
-  // * a faire
+  // Todo * a faire
   containerFile: (file: File) =>
     fetch(Api.queryUrl(path + "/containerFile"), {
       method: "PUT",
