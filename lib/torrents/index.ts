@@ -139,7 +139,7 @@ const Torrents = Api && {
   selectFiles: (id: string, files: string[]) => {
     const body = new URLSearchParams();
     if (files.length > 1) body.append("files", files.join(","));
-    else body.append("file", files[0]);
+    else body.append("files", files[0]);
     const data = files.length > 1 ? body : files[0];
     return fetch(Api.queryUrl(path + "/selectFiles/" + id), {
       method: "POST",
