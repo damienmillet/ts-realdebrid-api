@@ -32,7 +32,7 @@ const Torrents = Api && {
           success: Api.success,
           error: Api.error,
         }),
-        () => ({ success: Api.success, error: Api.error })
+        () => ({ success: Api.success, error: Api.error }),
       )
       .then((res: torrents) => res),
 
@@ -48,7 +48,7 @@ const Torrents = Api && {
           success: Api.success,
           error: Api.error,
         }),
-        () => ({ success: Api.success, error: Api.error })
+        () => ({ success: Api.success, error: Api.error }),
       )
       .then((res: torrent) => res),
 
@@ -64,7 +64,7 @@ const Torrents = Api && {
           success: Api.success,
           error: Api.error,
         }),
-        () => ({ success: Api.success, error: Api.error })
+        () => ({ success: Api.success, error: Api.error }),
       )
       .then((res: activeCount) => res),
 
@@ -80,7 +80,7 @@ const Torrents = Api && {
           success: Api.success,
           error: Api.error,
         }),
-        () => ({ success: Api.success, error: Api.error })
+        () => ({ success: Api.success, error: Api.error }),
       )
       .then((res: availableHosts) => res),
 
@@ -98,7 +98,7 @@ const Torrents = Api && {
           success: Api.success,
           error: Api.error,
         }),
-        () => ({ success: Api.success, error: Api.error })
+        () => ({ success: Api.success, error: Api.error }),
       )
       .then((res: addTorrent) => res),
 
@@ -116,7 +116,7 @@ const Torrents = Api && {
           success: Api.success,
           error: Api.error,
         }),
-        () => ({ success: Api.success, error: Api.error })
+        () => ({ success: Api.success, error: Api.error }),
       )
       .then((res: addMagnet) => res),
 
@@ -133,9 +133,30 @@ const Torrents = Api && {
           success: Api.success,
           error: Api.error,
         }),
-        () => ({ success: Api.success, error: Api.error })
+        () => ({ success: Api.success, error: Api.error }),
       )
       .then((res: deleteId) => res),
+  selectFiles: (id: string, files: string[]) => {
+    const body = new URLSearchParams();
+    if (files.length > 1) body.append("files", files.join(","));
+    else body.append("file", files[0]);
+    const data = files.length > 1 ? body : files[0];
+    return fetch(Api.queryUrl(path + "/selectFiles/" + id), {
+      method: "POST",
+      headers: Api.headers,
+      body: body,
+    })
+      .then((res) => Api.responseEngine(res))
+      .then((res: Response) => res.json())
+      .then(
+        (res: unknown) => ({
+          data: res,
+          success: Api.success,
+          error: Api.error,
+        }),
+        () => ({ success: Api.success, error: Api.error }),
+      );
+  },
 };
 
 export default Torrents;
