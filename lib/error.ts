@@ -12,7 +12,7 @@ class ApiError {
   async handleError() {
     const isJson = this.res.bodyUsed &&
       this.res.headers.get("Content-Type")?.includes("application/json");
-    this.info = isJson ? await this.res.json() : null;
+    this.info = isJson ? await this.res.json() : undefined;
     return {
       status: this.status,
       statusText: this.statusText,
