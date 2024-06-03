@@ -15,8 +15,16 @@ const Torrents = { // params?: torrentsParams
       Api.queryUrl(path + "/addTorrent", params),
       body,
     ),
-  addMagnet: (body: addMagnetBody) =>
-    Api.post<addMagnet>(path + "/addMagnet", body),
+  addMagnet: (body: addMagnetBody) => {
+    const form = new FormData();
+    form.append("magnet", body.magnet);
+    // const options = {
+    //   headers: {
+    //     "Content-Type": "multipart/form-data",
+    //   },
+    // };
+    Api.post<addMagnet>(path + "/addMagnet", form);
+  },
   delete: (id: string | string[] | number) =>
     Api.delete(path + "/" + id) as Promise<any>,
   selectFiles: async (id: string, files: string[]) => {

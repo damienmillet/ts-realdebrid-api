@@ -46,11 +46,11 @@ class Api {
   ) {
     return this.fetch(this.queryUrl(url, params)) as Promise<response<T>>;
   }
-  post<T = unknown>(url: string, body: any) {
-    return this.fetch(this.queryUrl(url), {
-      method: "POST",
-      body: JSON.stringify(body),
-    }) as Promise<response<T>>;
+  post<T = unknown>(url: string, body: BodyInit, options?: RequestInit) {
+    options = { headers: this.headers, ...options };
+    options.body = body;
+    options.method = "POST";
+    return this.fetch(this.queryUrl(url), options) as Promise<response<T>>;
   }
   put<T = unknown>(url: string, body: any) {
     return this.fetch(this.queryUrl(url), {
