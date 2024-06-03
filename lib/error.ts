@@ -10,14 +10,9 @@ class ApiError {
     this.res = res;
   }
   async handleError() {
-    if (
-      this.res.headers.get("Content-Type")?.includes("application/json") &&
-      this.res.bodyUsed
-    ) {
-      this.info = await this.res.json();
-    } else {
-      this.info = undefined;
-    }
+    const isJson = this.res.bodyUsed &&
+      this.res.headers.get("Content-Type")?.includes("application/json");
+    this.info = isJson ? await this.res.json() : null;
     return this;
   }
 }
