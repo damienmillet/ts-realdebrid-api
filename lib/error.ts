@@ -15,6 +15,8 @@ class ApiError {
       this.res.bodyUsed
     ) {
       this.info = await this.res.json();
+    } else {
+      this.info = undefined;
     }
     return this;
   }
