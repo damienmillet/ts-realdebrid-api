@@ -28,7 +28,7 @@ const Torrents = { // params?: torrentsParams
     if (body.host) form.append("host", body.host);
     const options = {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "content-type": "multipart/form-data",
       },
     };
     return Api.post<addMagnet>(path + "/addMagnet", form, options);
