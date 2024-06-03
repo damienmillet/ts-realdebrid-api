@@ -11,7 +11,7 @@ import {
 
 const path = "/torrents";
 
-const Torrents = { // params?: torrentsParams
+const Torrents = {
   get: () => Api.get(path),
   info: (id: string | string[] | number) =>
     Api.get<torrent>(path + "/info/" + id),
