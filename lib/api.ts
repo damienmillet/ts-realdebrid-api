@@ -6,7 +6,7 @@ class Api {
   headers = new Headers({
     Authorization: `Bearer ${process.env.REALDEBRID_API}`,
     Accept: "application/json",
-    "Content-Type": "application/json",
+    "content-type": "application/json",
   });
 
   queryUrl(uri: string, params?: any): string {
