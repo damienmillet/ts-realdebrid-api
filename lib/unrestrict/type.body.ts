@@ -5,6 +5,7 @@ export type checkBody = {
 
 export type containerLinkBody = {
   link: string;
+  password: string;
 };
 
 export type folderBody = {

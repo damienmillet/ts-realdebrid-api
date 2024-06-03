@@ -17,12 +17,24 @@ const path = "/unrestrict";
 
 const Unrestrict = {
   check: (body: checkBody) => Api.get<check>(path + "/check"),
-  link: (body: linkBody) => Api.post<link>(path + "/link", body),
-  folder: (body: folderBody) => Api.post<folder>(path + "/folder", body),
+  link: (body: linkBody) => {
+    const form = new FormData();
+    form.append("link", body.link);
+    return Api.post<link>(path + "/link", form);
+  },
+  folder: (body: folderBody) => {
+    const form = new FormData();
+    form.append("link", body.link);
+    return Api.post<folder>(path + "/folder", form);
+  },
   containerFile: (file: File) =>
     Api.put<containerFile>(path + "/containerFile", file),
-  containerLink: (body: containerLinkBody) =>
-    Api.post<containerLink>(path + "/containerLink", body),
+  containerLink: (body: containerLinkBody) => {
+    const form = new FormData();
+    form.append("link", body.link);
+    form.append("password", body.password);
+    return Api.post<containerLink>(path + "/containerLink", form);
+  },
 };
 
 export default Unrestrict;
