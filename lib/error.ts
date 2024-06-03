@@ -17,6 +17,7 @@ class ApiError {
       this.info = await this.res.json();
       return this;
     }
+    return this;
   }
 }
 
