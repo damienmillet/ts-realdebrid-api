@@ -36,7 +36,7 @@ class Api {
       return res;
     };
 
-    const error = !res.ok ? await (new ApiError(res)).handleError() : undefined;
+    const error = !res.ok ? await (new ApiError(res)).handleError() : null;
 
     return {
       success: res.ok,
