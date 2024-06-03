@@ -1,4 +1,4 @@
-export type checkData = {
+export type check = {
   host: string; // Host main domain
   link: string;
   filename: string;
@@ -6,14 +6,14 @@ export type checkData = {
   supported: number;
 };
 
-export type linkAlterData = {
+export type linkAlter = {
   id: string;
   filename: string;
   download: string;
   type: string;
 };
 
-export type linkData = {
+export type link = {
   id: string;
   filename: string;
   mimeType: string; // Mime Type of the file, guessed by the file extension
@@ -25,9 +25,9 @@ export type linkData = {
   download: string; // Generated link
   streamable: number; // Is the file streamable on website
   type: string; // Type of the file (in general, its quality)
-  alternative: linkAlterData[];
+  alternative: linkAlter[];
 };
 
-export type folderData = string[];
-export type containerFileData = string[];
-export type containerLinkData = string[];
+export type folder = string[];
+export type containerFile = string[];
+export type containerLink = string[];

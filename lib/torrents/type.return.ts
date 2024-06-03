@@ -1,4 +1,4 @@
-export type activeCountData = {
+export type activeCount = {
   nb: number; // Number of currently active torrents
   limit: number; // Maximum number of active torrents you can have
 };
@@ -37,15 +37,15 @@ export type torrent = {
 };
 export type torrents = torrent[];
 
-export type availableHostsData = {
+export type availableHosts = {
   host: string; // Host main domain
   max_file_size: number; // Max split size possible
 };
-export type addTorrentData = {
+export type addTorrent = {
   id: string;
   uri: string; // URL of the created ressource
 };
-export type addMagnetData = {
+export type addMagnet = {
   id: string;
   uri: string; // URL of the created ressource
 };

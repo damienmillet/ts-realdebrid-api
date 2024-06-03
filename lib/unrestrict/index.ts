@@ -6,23 +6,23 @@ import {
   linkBody,
 } from "./type.body";
 import {
-  checkData,
-  containerFileData,
-  containerLinkData,
-  folderData,
-  linkData,
+  check,
+  containerFile,
+  containerLink,
+  folder,
+  link,
 } from "./type.return";
 
 const path = "/unrestrict";
 
 const Unrestrict = {
-  check: (body: checkBody) => Api.get<checkData>(path + "/check"),
-  link: (body: linkBody) => Api.post<linkData>(path + "/link", body),
-  folder: (body: folderBody) => Api.post<folderData>(path + "/folder", body),
+  check: (body: checkBody) => Api.get<check>(path + "/check"),
+  link: (body: linkBody) => Api.post<link>(path + "/link", body),
+  folder: (body: folderBody) => Api.post<folder>(path + "/folder", body),
   containerFile: (file: File) =>
-    Api.put<containerFileData>(path + "/containerFile", file),
+    Api.put<containerFile>(path + "/containerFile", file),
   containerLink: (body: containerLinkBody) =>
-    Api.post<containerLinkData>(path + "/containerLink", body),
+    Api.post<containerLink>(path + "/containerLink", body),
 };
 
 export default Unrestrict;

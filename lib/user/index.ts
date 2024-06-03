@@ -4,7 +4,7 @@ import { user } from "../types";
 const path = "/user";
 
 const User = {
-  get: () => Api.get(path), // user
+  get: () => Api.get<user>(path), // user
 };
 
 export default User;

@@ -1,27 +1,22 @@
 import Api from "../api";
 import { addMagnetBody, addTorrentBody } from "./type.body";
-import { addTorrentParams, torrentsParams } from "./type.params";
-import {
-  activeCountData,
-  addMagnetData,
-  availableHostsData,
-  files,
-} from "./type.return";
+import { addTorrentParams } from "./type.params";
+import { activeCount, addMagnet, availableHosts, files } from "./type.return";
 
 const path = "/torrents";
 
 const Torrents = { // params?: torrentsParams
   get: () => Api.get(path),
   info: (id: string | string[] | number) => Api.get(path + "/info/" + id),
-  activeCount: () => Api.get<activeCountData>(path + "/activeCount"),
-  availableHosts: () => Api.get<availableHostsData>(path + "/availableHosts"),
+  activeCount: () => Api.get<activeCount>(path + "/activeCount"),
+  availableHosts: () => Api.get<availableHosts>(path + "/availableHosts"),
   addTorrent: (params: addTorrentParams, body: addTorrentBody) =>
     Api.put<string>(
       Api.queryUrl(path + "/addTorrent", params),
       body,
     ),
   addMagnet: (body: addMagnetBody) =>
-    Api.post<addMagnetData>(path + "/addMagnet", body),
+    Api.post<addMagnet>(path + "/addMagnet", body),
   delete: (id: string | string[] | number) =>
     Api.delete(path + "/" + id) as Promise<any>,
   selectFiles: async (id: string, files: string[]) => {
