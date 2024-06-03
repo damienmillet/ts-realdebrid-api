@@ -1,5 +1,5 @@
 class ApiError {
-  declare info: Record<string, unknown>;
+  declare info?: Record<string, unknown>;
   declare statusText: string;
   declare status: number;
   declare private res: Response;

@@ -30,7 +30,6 @@ class Api {
       if (res.url.includes("time") || res.url.includes("time/iso")) {
         return await res.text();
       }
-      console.log(res.headers);
       if (res.headers.get("Content-Type")?.includes("application/json")) {
         return await res.json();
       }
