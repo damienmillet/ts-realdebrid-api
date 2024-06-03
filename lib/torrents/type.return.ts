@@ -11,8 +11,10 @@ export type files = {
 export type torrent = {
   id: string;
   filename: string;
+  original_filename?: string;
   hash: string; // SHA1 Hash of the torrent
   bytes: number; // Size of selected files only
+  original_bytes?: number;
   host: string; // Host main domain
   split: number; // Split size of links
   progress: number; // Possible values: 0 to 100

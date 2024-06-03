@@ -1,13 +1,20 @@
 import Api from "../api";
 import { addMagnetBody, addTorrentBody } from "./type.body";
 import { addTorrentParams } from "./type.params";
-import { activeCount, addMagnet, availableHosts, files } from "./type.return";
+import {
+  activeCount,
+  addMagnet,
+  availableHosts,
+  files,
+  torrent,
+} from "./type.return";
 
 const path = "/torrents";
 
 const Torrents = { // params?: torrentsParams
   get: () => Api.get(path),
-  info: (id: string | string[] | number) => Api.get(path + "/info/" + id),
+  info: (id: string | string[] | number) =>
+    Api.get<torrent>(path + "/info/" + id),
   activeCount: () => Api.get<activeCount>(path + "/activeCount"),
   availableHosts: () => Api.get<availableHosts>(path + "/availableHosts"),
   addTorrent: (params: addTorrentParams, body: addTorrentBody) =>
@@ -18,11 +25,7 @@ const Torrents = { // params?: torrentsParams
   addMagnet: (body: addMagnetBody) => {
     const form = new FormData();
     form.append("magnet", body.magnet);
-    const options = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    };
+    if (body.host) form.append("host", body.host);
     return Api.post<addMagnet>(path + "/addMagnet", form);
   },
   delete: (id: string | string[] | number) =>
