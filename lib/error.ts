@@ -13,11 +13,16 @@ class ApiError {
     const isJson = this.res.bodyUsed &&
       this.res.headers.get("Content-Type")?.includes("application/json");
     this.info = isJson ? await this.res.json() : undefined;
-    return {
+    const res: {
+      status: number;
+      statusText: string;
+      info?: Record<string, unknown>;
+    } = {
       status: this.status,
       statusText: this.statusText,
-      info: this.info,
     };
+    if (this.info) res.info = this.info;
+    return res;
   }
 }
 
