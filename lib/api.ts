@@ -18,10 +18,6 @@ type api = {
     options: RequestInit,
   ) => Promise<response<T>>;
   get: CallableFunction;
-  //  <T = unknown>(
-  //   url: string,
-  //   params?: Record<string, string | number | string[]>,
-  // ) => Promise<response<T>>;
   post: CallableFunction;
   put: CallableFunction;
   delete: CallableFunction;
@@ -55,11 +51,10 @@ const Api: api = {
   }),
   queryUrl: (
     uri: string,
-    params?: Record<string, string | number | string[]>,
+    params?: {},
   ) => {
     const url = new URL(Api.baseUrl + uri);
-    params &&
-      (url.search = new URLSearchParams(JSON.stringify(params)).toString());
+    if (params) url.search = new URLSearchParams(params).toString();
     return url.toString();
   },
   fetch: async (
@@ -68,6 +63,7 @@ const Api: api = {
   ) => {
     options.headers = { ...Api.headers, ...options.headers };
     const res = await fetch(url, options);
+    console.log(res);
 
     const data = async () => {
       // if url/time return text()
