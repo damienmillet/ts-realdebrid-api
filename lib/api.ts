@@ -90,7 +90,8 @@ const Api: api = {
     url: string,
     params?: Record<string, string | number | string[]>,
   ) {
-    return await Api.fetch<T>(Api.queryUrl(url, params), {
+    // Api.queryUrl(url, params)
+    return await Api.fetch<T>(url, {
       method: "GET",
     }) as response<T>;
   },
