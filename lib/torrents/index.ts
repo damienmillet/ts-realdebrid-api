@@ -23,7 +23,7 @@ const Torrents = { // params?: torrentsParams
     //     "Content-Type": "multipart/form-data",
     //   },
     // };
-    Api.post<addMagnet>(path + "/addMagnet", form);
+    return Api.post<addMagnet>(path + "/addMagnet", form);
   },
   delete: (id: string | string[] | number) =>
     Api.delete(path + "/" + id) as Promise<any>,
