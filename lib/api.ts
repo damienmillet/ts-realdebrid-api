@@ -19,8 +19,9 @@ class Api {
     options?: RequestInit,
   ) {
     options = { headers: this.headers, ...options };
-    const res = await fetch(url, options);
-    console.log(res);
+    const req = fetch(url, options);
+    const res = await req;
+    console.log(req, res);
 
     const data = async () => {
       // if url/time return text()
