@@ -18,11 +18,11 @@ const Torrents = { // params?: torrentsParams
   addMagnet: (body: addMagnetBody) => {
     const form = new FormData();
     form.append("magnet", body.magnet);
-    // const options = {
-    //   headers: {
-    //     "Content-Type": "multipart/form-data",
-    //   },
-    // };
+    const options = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
     return Api.post<addMagnet>(path + "/addMagnet", form);
   },
   delete: (id: string | string[] | number) =>
