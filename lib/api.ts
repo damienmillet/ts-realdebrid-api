@@ -63,7 +63,6 @@ const Api: api = {
   ) => {
     options.headers = { ...Api.headers, ...options.headers };
     const res = await fetch(url, options);
-    console.log(res);
 
     const data = async () => {
       // if url/time return text()
@@ -90,8 +89,7 @@ const Api: api = {
     url: string,
     params?: Record<string, string | number | string[]>,
   ) {
-    // Api.queryUrl(url, params)
-    return await Api.fetch<T>(url, {
+    return await Api.fetch<T>(Api.queryUrl(url, params), {
       method: "GET",
     }) as response<T>;
   },

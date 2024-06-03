@@ -1,11 +1,11 @@
 {
   "name": "ts-realdebrid-api",
-  "version": "1.8.44",
+  "version": "1.8.45",
   "description": "RealDebrid API for typescript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rm -rf ./dist && tsc && npm publish",
+    "build": "rm -rf ./dist && tsc && npm version patch && npm publish",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
