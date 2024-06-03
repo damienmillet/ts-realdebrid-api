@@ -15,7 +15,6 @@ class ApiError {
       this.res.bodyUsed
     ) {
       this.info = await this.res.json();
-      return this;
     }
     return this;
   }
