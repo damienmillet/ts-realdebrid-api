@@ -26,12 +26,12 @@ const Torrents = { // params?: torrentsParams
     const form = new FormData();
     form.append("magnet", body.magnet);
     if (body.host) form.append("host", body.host);
-    // const options = {
-    //   headers: {
-    //     "content-type": "multipart/form-data",
-    //   },
-    // };
-    return Api.post<addMagnet>(path + "/addMagnet", form);
+    const options = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    return Api.post<addMagnet>(path + "/addMagnet", form, options);
   },
   delete: (id: string | string[] | number) =>
     Api.delete(path + "/" + id) as Promise<any>,
