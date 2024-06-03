@@ -14,8 +14,5 @@ export type download = {
   streamable: number;
   generated: string;
 };
-export type downloadsData = download[];
-
-export type downloads = response<downloadsData>;
 
 export type deleteId = response<unknown>;

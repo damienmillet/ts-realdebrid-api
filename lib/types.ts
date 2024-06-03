@@ -1,6 +1,4 @@
-import { response } from "../api";
-
-export type userData = {
+export type user = {
   id: number;
   username: string;
   email: string;
@@ -11,5 +9,3 @@ export type userData = {
   premium: number; // seconds left as a Premium user
   expiration: string; // jsonDate
 };
-
-export type user = response<userData>;

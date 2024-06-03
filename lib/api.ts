@@ -1,11 +1,10 @@
-import { stringify } from "querystring";
-
 export type response<T> = {
   data?: T;
-  success?: boolean;
+  success: boolean;
   error?: {
-    code?: number;
-    message?: string;
+    info: Record<string, unknown>;
+    statusText: string;
+    status: number;
   };
 };
 
@@ -13,13 +12,39 @@ type api = {
   baseUrl: string;
   headers: Headers;
   success?: boolean;
-  error?: {
-    code?: number;
-    message?: string;
-  };
   queryUrl: CallableFunction;
-  responseEngine: CallableFunction;
+  fetch: <T = unknown>(
+    url: string,
+    options: RequestInit,
+  ) => Promise<response<T>>;
+  get: CallableFunction;
+  //  <T = unknown>(
+  //   url: string,
+  //   params?: Record<string, string | number | string[]>,
+  // ) => Promise<response<T>>;
+  post: CallableFunction;
+  put: CallableFunction;
+  delete: CallableFunction;
 };
+
+class CustomError {
+  declare info: Record<string, unknown>;
+  declare statusText: string;
+  declare status: number;
+  declare private res: Response;
+
+  constructor(res: Response) {
+    this.statusText = res.statusText;
+    this.status = res.status;
+    this.res = res;
+  }
+  async handleError() {
+    if (this.res.headers.get("content-type")?.includes("application/json")) {
+      this.info = await this.res.json();
+      return this;
+    }
+  }
+}
 
 const Api: api = {
   baseUrl: "https://api.real-debrid.com/rest/1.0",
@@ -28,21 +53,67 @@ const Api: api = {
     Accept: "application/json",
     "Content-Type": "application/json",
   }),
-  queryUrl: (uri: string, params?: {}) => {
+  queryUrl: (
+    uri: string,
+    params?: Record<string, string | number | string[]>,
+  ) => {
     const url = new URL(Api.baseUrl + uri);
-    params && (url.search = new URLSearchParams(stringify(params)).toString());
+    params &&
+      (url.search = new URLSearchParams(JSON.stringify(params)).toString());
     return url.toString();
   },
-  responseEngine: (res: Response) => {
-    Api.success = res.ok;
-    Api.error =
-      res.status <= 200 && res.status > 300
-        ? {
-            code: res.status,
-            message: res.statusText,
-          }
-        : undefined;
-    return res;
+  fetch: async (
+    url: string,
+    options: RequestInit,
+  ) => {
+    options.headers = { ...Api.headers, ...options.headers };
+    const res = await fetch(url, options);
+
+    const data = async () => {
+      // if url/time return text()
+      if (res.url.includes("time") || res.url.includes("time/iso")) {
+        return await res.text();
+      }
+      if (res.headers.get("content-type")?.includes("application/json")) {
+        return await res.json();
+      }
+      return res;
+    };
+
+    const error = !res.ok
+      ? await (new CustomError(res)).handleError()
+      : undefined;
+
+    return {
+      success: res.ok,
+      data: await data(),
+      error: error,
+    };
+  },
+  async get<T = unknown>(
+    url: string,
+    params?: Record<string, string | number | string[]>,
+  ) {
+    return await Api.fetch<T>(Api.queryUrl(url, params), {
+      method: "GET",
+    }) as response<T>;
+  },
+  async post(url: string, body: any) {
+    return await Api.fetch(Api.queryUrl(url), {
+      method: "POST",
+      body: JSON.stringify(body),
+    });
+  },
+  async put(url: string, body: any) {
+    return await Api.fetch(Api.queryUrl(url), {
+      method: "PUT",
+      body: JSON.stringify(body),
+    });
+  },
+  async delete(url: string) {
+    return await Api.fetch(Api.queryUrl(url), {
+      method: "DELETE",
+    });
   },
 };
 export default Api;

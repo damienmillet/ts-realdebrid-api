@@ -1,4 +1,3 @@
-import Torrents from ".";
 import { response } from "../api";
 
 export type activeCountData = {
@@ -11,7 +10,7 @@ export type files = {
   bytes: number;
   selected: number; // 0 or 1
 };
-export type torrentData = {
+export type torrent = {
   id: string;
   filename: string;
   hash: string; // SHA1 Hash of the torrent
@@ -19,7 +18,18 @@ export type torrentData = {
   host: string; // Host main domain
   split: number; // Split size of links
   progress: number; // Possible values: 0 to 100
-  status: string; // Current status of the torrent: magnet_error, magnet_conversion, waiting_files_selection, queued, downloading, downloaded, error, virus, compressing, uploading, dead
+  status:
+    | "magnet_error"
+    | "magnet_conversion"
+    | "waiting_files_selection"
+    | "queued"
+    | "downloading"
+    | "downloaded"
+    | "error"
+    | "virus"
+    | "compressing"
+    | "uploading"
+    | "dead";
   added: string; // jsonDate
   links: string[];
   files: files[];
@@ -27,7 +37,7 @@ export type torrentData = {
   speed: number; // !! Only present in "downloading", "compressing", "uploading" status
   seeders: number; // !! Only present in "downloading", "magnet_conversion" status
 };
-export type torrentsData = torrent[];
+export type torrents = torrent[];
 
 export type availableHostsData = {
   host: string; // Host main domain
@@ -43,10 +53,7 @@ export type addMagnetData = {
 };
 
 export type activeCount = response<activeCountData>;
-
 export type addTorrent = response<addTorrentData>;
 export type addMagnet = response<addMagnetData>;
 export type availableHosts = response<availableHostsData>;
-export type torrent = response<torrentData>;
-export type torrents = response<torrentsData>;
 export type deleteId = response<unknown>;

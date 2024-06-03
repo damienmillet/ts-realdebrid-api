@@ -1,22 +1,10 @@
 import Api from "../api";
-import { user, userData } from "./type.return";
+import { user } from "../types";
 
 const path = "/user";
 
-const User = Api && {
-  get: () =>
-    fetch(Api.queryUrl(path), { headers: Api.headers })
-      .then((res) => Api.responseEngine(res))
-      .then((res: Response) => res.json())
-      .then(
-        (res: userData) => ({
-          data: res,
-          success: Api.success,
-          error: Api.error,
-        }),
-        () => ({ success: Api.success, error: Api.error })
-      )
-      .then((res: user) => res),
+const User = {
+  get: () => Api.get(path), // user
 };
 
 export default User;
