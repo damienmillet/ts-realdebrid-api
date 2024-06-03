@@ -26,8 +26,9 @@ const Torrents = { // params?: torrentsParams
     const form = new FormData();
     form.append("magnet", body.magnet);
     if (body.host) form.append("host", body.host);
-    // Api.headers.delete("Content-Type");
+    Api.headers.delete("Content-Type");
     Api.headers.set("Content-Type", "multipart/form-data");
+    // Api.
     return Api.post<addMagnet>(path + "/addMagnet", form);
   },
   delete: (id: string | string[] | number) =>
