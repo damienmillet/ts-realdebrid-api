@@ -6,7 +6,7 @@ class Api {
   headers = {
     Authorization: `Bearer ${process.env.REALDEBRID_API}`,
     Accept: "application/json",
-    "content-type": "application/json",
+    "Content-Type": "application/json",
   };
 
   queryUrl(uri: string, params?: any): string {
@@ -31,7 +31,7 @@ class Api {
         return await res.text();
       }
       console.log(res.headers);
-      if (res.headers.get("content-type")?.includes("application/json")) {
+      if (res.headers.get("Content-Type")?.includes("application/json")) {
         return await res.json();
       }
       return res;
