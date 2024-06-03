@@ -10,7 +10,10 @@ class ApiError {
     this.res = res;
   }
   async handleError() {
-    if (this.res.headers.get("Content-Type")?.includes("application/json")) {
+    if (
+      this.res.headers.get("Content-Type")?.includes("application/json") &&
+      this.res.bodyUsed
+    ) {
       this.info = await this.res.json();
       return this;
     }
