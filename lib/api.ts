@@ -3,11 +3,11 @@ import { response } from "./types";
 
 class Api {
   baseUrl = "https://api.real-debrid.com/rest/1.0";
-  headers = new Headers({
+  headers = {
     Authorization: `Bearer ${process.env.REALDEBRID_API}`,
     Accept: "application/json",
     "content-type": "application/json",
-  });
+  };
 
   queryUrl(uri: string, params?: any): string {
     const url = new URL(this.baseUrl + uri);
@@ -52,11 +52,10 @@ class Api {
     return this.fetch(this.queryUrl(url, params)) as Promise<response<T>>;
   }
   post<T = unknown>(url: string, body: BodyInit, options: RequestInit = {}) {
-    const headersObj = Object.fromEntries(this.headers.entries());
     // Overwrite headers with options if options.headers is set
     options = options.headers
-      ? { ...options, headers: { ...headersObj, ...options.headers } }
-      : { ...options, headers: { ...headersObj } };
+      ? { ...options, headers: { ...this.headers, ...options.headers } }
+      : { ...options, headers: { ...this.headers } };
     // Convert Headers instance to plain object
 
     options.body = body;
