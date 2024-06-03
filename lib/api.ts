@@ -3,11 +3,11 @@ import { response } from "./types";
 
 class Api {
   baseUrl = "https://api.real-debrid.com/rest/1.0";
-  headers = {
+  headers = new Headers({
     Authorization: `Bearer ${process.env.REALDEBRID_API}`,
     Accept: "application/json",
     "Content-Type": "application/json",
-  };
+  });
 
   queryUrl(uri: string, params?: any): string {
     const url = new URL(this.baseUrl + uri);
