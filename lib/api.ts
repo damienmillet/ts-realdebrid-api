@@ -51,12 +51,6 @@ class Api {
     return this.fetch(this.queryUrl(url, params)) as Promise<response<T>>;
   }
   post<T = unknown>(url: string, body: BodyInit, options: RequestInit = {}) {
-    // Overwrite headers with options if options.headers is set
-    options = options.headers
-      ? { ...options, headers: { ...this.headers, ...options.headers } }
-      : { ...options, headers: { ...this.headers } };
-    // Convert Headers instance to plain object
-
     options.body = body;
     options.method = "POST";
     return this.fetch(this.queryUrl(url), options) as Promise<response<T>>;
