@@ -50,8 +50,14 @@ class Api {
   ) {
     return this.fetch(this.queryUrl(url, params)) as Promise<response<T>>;
   }
-  post<T = unknown>(url: string, body: BodyInit, options?: RequestInit) {
-    options = { headers: this.headers, ...options };
+  post<T = unknown>(url: string, body: BodyInit, options: RequestInit = {}) {
+    const headersObj = Object.fromEntries(this.headers.entries());
+    // Overwrite headers with options if options.headers is set
+    options = options.headers
+      ? { ...options, headers: { ...headersObj, ...options.headers } }
+      : { ...options, headers: { ...headersObj } };
+    // Convert Headers instance to plain object
+
     options.body = body;
     options.method = "POST";
     return this.fetch(this.queryUrl(url), options) as Promise<response<T>>;
