@@ -1,67 +1,24 @@
-export type response<T> = {
-  data?: T;
-  success: boolean;
-  error?: {
-    info: Record<string, unknown>;
-    statusText: string;
-    status: number;
-  };
-};
+import ApiError from "./error";
+import { response } from "./types";
 
-type api = {
-  baseUrl: string;
-  headers: Headers;
-  success?: boolean;
-  queryUrl: CallableFunction;
-  fetch: <T = unknown>(
-    url: string,
-    options: RequestInit,
-  ) => Promise<response<T>>;
-  get: CallableFunction;
-  post: CallableFunction;
-  put: CallableFunction;
-  delete: CallableFunction;
-};
-
-class CustomError {
-  declare info: Record<string, unknown>;
-  declare statusText: string;
-  declare status: number;
-  declare private res: Response;
-
-  constructor(res: Response) {
-    this.statusText = res.statusText;
-    this.status = res.status;
-    this.res = res;
-  }
-  async handleError() {
-    if (this.res.headers.get("content-type")?.includes("application/json")) {
-      this.info = await this.res.json();
-      return this;
-    }
-  }
-}
-
-const Api: api = {
-  baseUrl: "https://api.real-debrid.com/rest/1.0",
-  headers: new Headers({
+class Api {
+  baseUrl = "https://api.real-debrid.com/rest/1.0";
+  headers = new Headers({
     Authorization: `Bearer ${process.env.REALDEBRID_API}`,
     Accept: "application/json",
     "Content-Type": "application/json",
-  }),
-  queryUrl: (
-    uri: string,
-    params?: {},
-  ) => {
-    const url = new URL(Api.baseUrl + uri);
+  });
+
+  queryUrl(uri: string, params?: any): string {
+    const url = new URL(this.baseUrl + uri);
     if (params) url.search = new URLSearchParams(params).toString();
     return url.toString();
-  },
-  fetch: async (
+  }
+  async fetch(
     url: string,
-    options: RequestInit,
-  ) => {
-    options.headers = { ...Api.headers, ...options.headers };
+    options?: RequestInit,
+  ) {
+    options = { headers: this.headers, ...options };
     const res = await fetch(url, options);
 
     const data = async () => {
@@ -75,40 +32,37 @@ const Api: api = {
       return res;
     };
 
-    const error = !res.ok
-      ? await (new CustomError(res)).handleError()
-      : undefined;
+    const error = !res.ok ? await (new ApiError(res)).handleError() : undefined;
 
     return {
       success: res.ok,
       data: await data(),
       error: error,
     };
-  },
-  async get<T = unknown>(
+  }
+  get<T = unknown>(
     url: string,
-    params?: Record<string, string | number | string[]>,
+    params?: any,
   ) {
-    return await Api.fetch<T>(Api.queryUrl(url, params), {
-      method: "GET",
-    }) as response<T>;
-  },
-  async post(url: string, body: any) {
-    return await Api.fetch(Api.queryUrl(url), {
+    return this.fetch(this.queryUrl(url, params)) as Promise<response<T>>;
+  }
+  post<T = unknown>(url: string, body: any) {
+    return this.fetch(this.queryUrl(url), {
       method: "POST",
       body: JSON.stringify(body),
-    });
-  },
-  async put(url: string, body: any) {
-    return await Api.fetch(Api.queryUrl(url), {
+    }) as Promise<response<T>>;
+  }
+  put<T = unknown>(url: string, body: any) {
+    return this.fetch(this.queryUrl(url), {
       method: "PUT",
       body: JSON.stringify(body),
-    });
-  },
-  async delete(url: string) {
-    return await Api.fetch(Api.queryUrl(url), {
+    }) as Promise<response<T>>;
+  }
+  delete<T = unknown>(url: string) {
+    return this.fetch(this.queryUrl(url), {
       method: "DELETE",
-    });
-  },
-};
-export default Api;
+    }) as Promise<response<T>>;
+  }
+}
+
+export default new Api();

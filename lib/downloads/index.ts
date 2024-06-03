@@ -1,13 +1,12 @@
 import Api from "../api";
 import { downloadsParams } from "./type.params";
-import { deleteId, download } from "./type.return";
+import { download } from "./type.return";
 
 const path = "/downloads";
 
 const Downloads = {
-  get: (params?: downloadsParams) => Api.get(path), // download[]
-  delete: (id: string | string[] | number) =>
-    Api.delete(path + "/" + id) as Promise<deleteId>,
+  get: (params?: downloadsParams) => Api.get<download>(path), // download[]
+  delete: (id: string | string[] | number) => Api.delete<any>(path + "/" + id),
 };
 
 export default Downloads;

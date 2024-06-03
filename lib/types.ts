@@ -9,3 +9,13 @@ export type user = {
   premium: number; // seconds left as a Premium user
   expiration: string; // jsonDate
 };
+
+export type response<T> = {
+  data?: T;
+  success: boolean;
+  error?: {
+    info: Record<string, unknown>;
+    statusText: string;
+    status: number;
+  };
+};

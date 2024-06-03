@@ -1,5 +1,3 @@
-import { response } from "../api";
-
 export type activeCountData = {
   nb: number; // Number of currently active torrents
   limit: number; // Maximum number of active torrents you can have
@@ -51,9 +49,3 @@ export type addMagnetData = {
   id: string;
   uri: string; // URL of the created ressource
 };
-
-export type activeCount = response<activeCountData>;
-export type addTorrent = response<addTorrentData>;
-export type addMagnet = response<addMagnetData>;
-export type availableHosts = response<availableHostsData>;
-export type deleteId = response<unknown>;
