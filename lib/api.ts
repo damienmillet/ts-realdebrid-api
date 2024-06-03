@@ -23,7 +23,6 @@ class Api {
 
     const req = fetch(url, options);
     const res = await req;
-    console.log(req, res, (await req).headers);
 
     const data = async () => {
       if (!res.bodyUsed) return undefined;
