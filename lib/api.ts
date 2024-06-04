@@ -3,11 +3,9 @@ import { response } from "./types";
 
 class Api {
   baseUrl = "https://api.real-debrid.com/rest/1.0";
-  headers = new Headers({
+  headers = {
     Authorization: `Bearer ${process.env.REALDEBRID_API}`,
-    Accept: "application/json",
-    "Content-Type": "application/json",
-  });
+  };
 
   queryUrl(uri: string, params?: any): string {
     const url = new URL(this.baseUrl + uri);
@@ -18,11 +16,7 @@ class Api {
     url: string,
     options?: RequestInit,
   ) {
-    options = { headers: this.headers, ...options };
-    console.log(options);
-    const req = fetch(url, options);
-    const res = await req;
-
+    const res = await fetch(url, { ...options, headers: this.headers });
     const data = async () => {
       if (!res.bodyUsed) return undefined;
       // if url/time return text()
@@ -46,22 +40,39 @@ class Api {
   get<T = unknown>(
     url: string,
     params?: any,
+    options?: RequestInit,
   ) {
-    return this.fetch(this.queryUrl(url, params)) as Promise<response<T>>;
+    return this.fetch(this.queryUrl(url, params), options) as Promise<
+      response<T>
+    >;
   }
-  post<T = unknown>(url: string, body: BodyInit, options: RequestInit = {}) {
-    options.body = body;
-    options.method = "POST";
-    return this.fetch(this.queryUrl(url), options) as Promise<response<T>>;
-  }
-  put<T = unknown>(url: string, body: any) {
-    return this.fetch(this.queryUrl(url), {
-      method: "PUT",
-      body: JSON.stringify(body),
+  post<T = unknown>(
+    url: string,
+    body: BodyInit,
+    params?: any,
+    options?: RequestInit,
+  ) {
+    return this.fetch(this.queryUrl(url, params), {
+      ...options,
+      method: "POST",
+      body,
     }) as Promise<response<T>>;
   }
-  delete<T = unknown>(url: string) {
-    return this.fetch(this.queryUrl(url), {
+  put<T = unknown>(
+    url: string,
+    body: any,
+    params?: any,
+    options?: RequestInit,
+  ) {
+    return this.fetch(this.queryUrl(url, params), {
+      ...options,
+      method: "PUT",
+      body: body,
+    }) as Promise<response<T>>;
+  }
+  delete<T = unknown>(url: string, params?: any, options?: RequestInit) {
+    return this.fetch(this.queryUrl(url, params), {
+      ...options,
       method: "DELETE",
     }) as Promise<response<T>>;
   }
