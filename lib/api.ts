@@ -19,7 +19,6 @@ class Api {
   ) {
     const res = await fetch(url, { ...options, headers: this.headers });
     const data = async () => {
-      if (!res.bodyUsed) return undefined;
       // if url/time return text()
       if (res.url.includes("time") || res.url.includes("time/iso")) {
         return await res.text();
