@@ -18,10 +18,7 @@ class Api {
     url: string,
     options?: RequestInit,
   ) {
-    console.log(options);
-    options = { ...{ headers: this.headers }, ...options };
-    console.log(options);
-
+    options = { headers: this.headers, ...options };
     const req = fetch(url, options);
     const res = await req;
 

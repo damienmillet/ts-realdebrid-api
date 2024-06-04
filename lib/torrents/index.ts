@@ -27,10 +27,7 @@ const Torrents = {
     form.append("magnet", body.magnet);
     if (body.host) form.append("host", body.host);
     const options = {
-      headers: {
-        ...Api.headers,
-        headers: { "Content-Type": "multipart/form-data" },
-      },
+      headers: { "Content-Type": "multipart/form-data" },
     };
     return Api.post<addMagnet>(path + "/addMagnet", form, options);
   },
