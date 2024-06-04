@@ -31,11 +31,10 @@ const Torrents = {
   delete: (id: string | string[] | number) =>
     Api.delete(path + "/" + id) as Promise<any>,
   selectFiles: async (id: string, files: string[]) => {
-    const body = new URLSearchParams();
+    const body = new FormData();
     if (files.length > 1) body.append("files", files.join(","));
     else body.append("files", files[0]);
-    const data = files.length > 1 ? body : files[0];
-    return await Api.post<files>(path + "/selectFiles/" + id, data);
+    return await Api.post<files>(path + "/selectFiles/" + id, body);
   },
 };
 
