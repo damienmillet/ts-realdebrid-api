@@ -5,6 +5,7 @@ class Api {
   baseUrl = "https://api.real-debrid.com/rest/1.0";
   headers = {
     Authorization: `Bearer ${process.env.REALDEBRID_API}`,
+    accept: "application/json",
   };
 
   queryUrl(uri: string, params?: any): string {
