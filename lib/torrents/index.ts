@@ -12,7 +12,7 @@ import {
 const path = "/torrents";
 
 const Torrents = {
-  get: () => Api.get(path),
+  get: () => Api.get<torrent[]>(path),
   info: (id: string | string[] | number) =>
     Api.get<torrent>(path + "/info/" + id),
   activeCount: () => Api.get<activeCount>(path + "/activeCount"),
