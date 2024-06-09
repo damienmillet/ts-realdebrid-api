@@ -6,6 +6,7 @@ class Api {
   headers = {
     Authorization: `Bearer ${process.env.REALDEBRID_API}`,
     accept: "application/json",
+    cache: "no-store",
   };
 
   queryUrl(uri: string, params?: any): string {

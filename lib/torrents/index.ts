@@ -29,7 +29,7 @@ const Torrents = {
     return Api.post<addMagnet>(path + "/addMagnet", form);
   },
   delete: (id: string | string[] | number) =>
-    Api.delete(path + "/" + id) as Promise<any>,
+    Api.delete<null>(path + "/delete/" + id),
   selectFiles: async (id: string, files: string[]) => {
     const body = new FormData();
     if (files.length > 1) body.append("files", files.join(","));
