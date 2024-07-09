@@ -1,5 +1,3 @@
-import { getErrorMessage } from "./errorHandler";
-
 export async function fetchAPI(
   path: string,
   options: RequestInit = {},
@@ -26,13 +24,12 @@ export async function fetchAPI(
 
   const data = await response.json();
 
-  if (!data) {
-    const errorMessage = getErrorMessage(path, data.error_code);
+  if (data.error_code || data.error) {
     return {
       success: false,
-      error: { code: data.error_code, message: errorMessage },
+      error: { code: data.error_code, message: data.error },
     };
   }
 
-  return { success: true, ...(data.data && { data: data.data }) };
+  return { success: true, ...(data && { data: data }) };
 }
