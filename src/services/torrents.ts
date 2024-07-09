@@ -56,8 +56,8 @@ export async function availableHosts(): Promise<ApiResponse> {
 //     body,
 //   ),
 
-export async function addTorrent(id: string): Promise<ApiResponse> {
-  return fetchAPI(path + "/addTorrent/" + id, { method: "PUT" });
+export async function addTorrent(file: File | File[]): Promise<ApiResponse> {
+  return fetchAPI(path + "/addTorrent", { method: "PUT" });
 }
 
 export async function addMagnet(magnet: string): Promise<ApiResponse> {
