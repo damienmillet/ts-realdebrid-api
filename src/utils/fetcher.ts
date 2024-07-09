@@ -22,6 +22,10 @@ export async function fetchAPI(
     };
   }
 
+  if (response.status === 204) {
+    return { success: true };
+  }
+
   if (response.url.includes("time") || response.url.includes("time/iso")) {
     return { success: true, data: { time: await response.text() } };
   }

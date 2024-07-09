@@ -51,9 +51,7 @@ export function getErrorMessage(
   if (pathErrors) {
     if (pathErrors) {
       const error = pathErrors.find((err) => err.code === code);
-      if (error) {
-        return error.message;
-      }
+      if (error) return error.message;
       const commonErrors = errorMessages["COMMON"];
       const commonError = commonErrors.find((err) => err.code === code);
       if (commonError) return commonError.message;
