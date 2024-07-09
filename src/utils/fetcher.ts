@@ -4,7 +4,7 @@ export async function fetchAPI(
   path: string,
   options: RequestInit = {},
 ): Promise<any> {
-  const url = new URL("https://api.real-debrid.com/rest/1.0/");
+  const url = new URL("https://api.real-debrid.com/rest/1.0/" + path);
 
   options.headers = {
     ...options?.headers,
