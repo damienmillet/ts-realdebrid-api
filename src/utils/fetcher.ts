@@ -23,7 +23,7 @@ export async function fetchAPI(
   }
 
   if (response.url.includes("time") || response.url.includes("time/iso")) {
-    return { success: true, data: { time: response.text() } };
+    return { success: true, data: { time: await response.text() } };
   }
 
   const data = await response.json();
