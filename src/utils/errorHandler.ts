@@ -37,10 +37,9 @@ const errorMessages: Record<string, { code: number; message: string }[]> = {
     { code: 34, message: "Too many requests" },
     { code: 35, message: "Infringing file" },
     { code: 36, message: "Fair Usage Limit" },
-  ],
-  "user": [
     { code: 401, message: "Bad token (expired, invalid)" },
     { code: 403, message: "Permission denied (account locked)" },
+    { code: 503, message: "Service unavailable (not enough points)" },
   ],
 };
 

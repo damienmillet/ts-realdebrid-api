@@ -3,7 +3,7 @@ import { fetchAPI } from "../utils/fetcher";
 
 const path = "time";
 
-export type time = {};
+export type time = string;
 
 export async function get(): Promise<ApiResponse<time>> {
   return fetchAPI(path);
