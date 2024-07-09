@@ -1,7 +1,7 @@
 import { ApiResponse } from "../types";
 import { fetchAPI } from "../utils/fetcher";
 
-const apiPath = "user";
+const path = "user";
 
 export type user = {
   id: number;
@@ -16,5 +16,5 @@ export type user = {
 };
 
 export async function get(): Promise<ApiResponse<user>> {
-  return fetchAPI(apiPath);
+  return fetchAPI(path);
 }
