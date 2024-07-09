@@ -26,10 +26,15 @@ export async function fetchAPI(
     };
   }
 
+  console.log("ok", response.ok);
+
   const data = await response.json();
+
+  console.log("data", data);
 
   if (!data.success) {
     const errorMessage = getErrorMessage(path, data.error_code);
+    console.log("error", errorMessage);
     return {
       success: false,
       error: { code: data.error_code, message: errorMessage },
