@@ -1,9 +1,6 @@
+import * as User from "./services/user";
+
 const Index = {
-  Downloads: Downloads,
-  Settings: Settings,
-  Time: Time,
-  Torrents: Torrents,
-  Unrestrict: Unrestrict,
   User: User,
 };
 
