@@ -1,3 +1,8 @@
+import { ApiResponse } from "../types";
+import { fetchAPI } from "../utils/fetcher";
+
+const apiPath = "user";
+
 export type user = {
   id: number;
   username: string;
@@ -10,12 +15,6 @@ export type user = {
   expiration: string; // jsonDate
 };
 
-export type response<T> = {
-  data?: T;
-  success: boolean;
-  error?: {
-    info: Record<string, unknown>;
-    statusText: string;
-    status: number;
-  };
-};
+export async function get(): Promise<ApiResponse<user>> {
+  return fetchAPI(apiPath);
+}
