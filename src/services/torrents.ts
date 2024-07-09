@@ -69,16 +69,14 @@ export async function addMagnet(magnet: string): Promise<ApiResponse> {
   });
 }
 
-export async function selectFiles(id: string): Promise<ApiResponse> {
-  return fetchAPI(path + "/selectFiles/" + id, { method: "POST" });
+export async function selectFiles(
+  id: string,
+  files: string,
+): Promise<ApiResponse> {
+  const body = new FormData();
+  body.append("files", files);
+  return fetchAPI(path + "/selectFiles/" + id, { method: "POST", body });
 }
-
-// selectFiles: async (id: string, files: string[]) => {
-//   const body = new FormData();
-//   if (files.length > 1) body.append("files", files.join(","));
-//   else body.append("files", files[0]);
-//   return await Api.post<files>(path + "/selectFiles/" + id, body);
-// },
 
 export async function remove(id: string): Promise<ApiResponse> {
   return fetchAPI(path + "/delete/" + id, { method: "DELETE" });
