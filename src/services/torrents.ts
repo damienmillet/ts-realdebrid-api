@@ -34,10 +34,6 @@ export async function get(
   return fetchAPI(path);
 }
 
-export async function details(): Promise<ApiResponse> {
-  return fetchAPI(path + "/details");
-}
-
 export async function info(id: string): Promise<ApiResponse> {
   return fetchAPI(path + "/info/" + id);
 }
@@ -54,20 +50,35 @@ export async function availableHosts(): Promise<ApiResponse> {
   return fetchAPI(path + "/availableHosts");
 }
 
+// addTorrent: (params: addTorrentParams, body: addTorrentBody) =>
+//   Api.put<string>(
+//     Api.queryUrl(path + "/addTorrent", params),
+//     body,
+//   ),
+
 export async function addTorrent(id: string): Promise<ApiResponse> {
   return fetchAPI(path + "/addTorrent/" + id, { method: "PUT" });
 }
 
 export async function addMagnet(magnet: string): Promise<ApiResponse> {
+  const form = new FormData();
+  form.append("magnet", magnet);
   return fetchAPI(path + "/addMagnet", {
     method: "POST",
-    body: JSON.stringify({ magnet }),
+    body: form,
   });
 }
 
 export async function selectFiles(id: string): Promise<ApiResponse> {
   return fetchAPI(path + "/selectFiles/" + id, { method: "POST" });
 }
+
+// selectFiles: async (id: string, files: string[]) => {
+//   const body = new FormData();
+//   if (files.length > 1) body.append("files", files.join(","));
+//   else body.append("files", files[0]);
+//   return await Api.post<files>(path + "/selectFiles/" + id, body);
+// },
 
 export async function remove(id: string): Promise<ApiResponse> {
   return fetchAPI(path + "/delete/" + id, { method: "DELETE" });
