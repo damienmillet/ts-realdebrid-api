@@ -12,8 +12,6 @@ export async function fetchAPI(
     accept: "application/json",
   };
 
-  console.log(options.headers);
-
   const response = await fetch(url.toString(), {
     ...options,
     cache: "no-cache",
@@ -26,15 +24,10 @@ export async function fetchAPI(
     };
   }
 
-  console.log("ok", response.ok);
-
   const data = await response.json();
 
-  console.log("data", data);
-
-  if (!data.success) {
+  if (!data) {
     const errorMessage = getErrorMessage(path, data.error_code);
-    console.log("error", errorMessage);
     return {
       success: false,
       error: { code: data.error_code, message: errorMessage },
