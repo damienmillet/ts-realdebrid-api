@@ -27,10 +27,10 @@ export async function fetchAPI(
   const data = await response.json();
 
   if (!data.success) {
-    const errorMessage = getErrorMessage(path, data.error.code);
+    const errorMessage = getErrorMessage(path, data.error_code);
     return {
       success: false,
-      error: { code: data.error.code, message: errorMessage },
+      error: { code: data.error_code, message: errorMessage },
     };
   }
 
