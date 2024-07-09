@@ -1,6 +1,6 @@
 {
   "name": "ts-realdebrid-api",
-  "version": "1.8.108",
+  "version": "1.8.109",
   "description": "RealDebrid API for typescript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
