@@ -6,16 +6,28 @@ export async function fetchAPI(
 ): Promise<any> {
   const url = new URL("https://api.real-debrid.com/rest/1.0/" + path);
 
+  console.log("fetchAPI", url.toString());
+
   options.headers = {
     ...options?.headers,
     Authorization: `Bearer ${process.env.REALDEBRID_API}`,
     accept: "application/json",
   };
 
+  console.log(
+    "fetchAPI",
+    fetch(url.toString(), {
+      ...options,
+      cache: "no-cache",
+    }),
+  );
+
   const response = await fetch(url.toString(), {
     ...options,
     cache: "no-cache",
   });
+
+  console.log("fetchAPI", response);
 
   if (!response.ok) {
     return {
