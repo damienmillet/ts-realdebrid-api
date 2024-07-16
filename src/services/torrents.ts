@@ -23,6 +23,14 @@ export type torrent = {
 
 export type torrents = torrent[];
 
+export type instantAvailability = {
+  [hash: string]: {
+    [host: string]: {
+      [index: number]: { filename: string; filesize: number };
+    }[];
+  };
+};
+
 /**
  * @param options.offset Starting offset (must be within 0 and X-Total-Count HTTP header)
  * @param options.page Pagination system
@@ -40,7 +48,9 @@ export async function info(id: string): Promise<ApiResponse> {
   return fetchAPI(path + "/info/" + id);
 }
 
-export async function instantAvailability(hash: string): Promise<ApiResponse> {
+export async function instantAvailability(
+  hash: string,
+): Promise<ApiResponse<instantAvailability>> {
   return fetchAPI(path + "/instantAvailability/" + hash);
 }
 
