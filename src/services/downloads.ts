@@ -3,7 +3,7 @@ import { fetchAPI } from "../utils/fetcher";
 
 const path = "downloads";
 
-export type downloads = {
+export type download = {
   id: string;
   filename: string;
   mimeType: string; // Mime Type of the file, guessed by the file extension
@@ -13,7 +13,8 @@ export type downloads = {
   chunks: number; // Max Chunks allowed
   download: string; // Generated link
   generated: string; // jsonDate
-}[];
+};
+export type downloads = download[];
 
 /**
  * @param options.offset Starting offset (must be within 0 and X-Total-Count HTTP header)

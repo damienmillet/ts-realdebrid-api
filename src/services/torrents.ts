@@ -3,7 +3,7 @@ import { fetchAPI } from "../utils/fetcher";
 
 const path = "torrents";
 
-export type torrents = {
+export type torrent = {
   id: string;
   filename: string;
   hash: string; // SHA1 Hash of the torrent
@@ -20,6 +20,8 @@ export type torrents = {
   speed?: number; // !! Only present in downloading, compressing, uploading status
   seeders?: number; // !! Only present in downloading, magnet_conversion status
 }[];
+
+export type torrents = torrent[];
 
 /**
  * @param options.offset Starting offset (must be within 0 and X-Total-Count HTTP header)
