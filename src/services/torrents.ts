@@ -19,7 +19,7 @@ export type torrent = {
   ended?: string; // !! Only present when finished, jsonDate
   speed?: number; // !! Only present in downloading, compressing, uploading status
   seeders?: number; // !! Only present in downloading, magnet_conversion status
-}[];
+};
 
 export type torrents = torrent[];
 
