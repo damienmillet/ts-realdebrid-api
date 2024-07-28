@@ -1,7 +1,16 @@
+type CustomResponse = {
+  success: boolean;
+  data?: Record<string, unknown>;
+  error?: {
+    code: number;
+    message: string;
+  };
+};
+
 export async function fetchAPI(
   path: string,
   options: RequestInit = {},
-): Promise<any> {
+): Promise<Response | CustomResponse> {
   try {
     const url = new URL(`https://api.real-debrid.com/rest/1.0/${path}`);
 
@@ -40,6 +49,7 @@ export async function fetchAPI(
       return handleError(error.message);
     }
   }
+  return handleError("An unknown error occurred");
 }
 
 export function handleError(message: string, code = 500) {
