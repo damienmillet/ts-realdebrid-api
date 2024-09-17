@@ -22,12 +22,12 @@ export type downloads = download[];
  * @param options.limit Entries returned per page / request (must be within 0 and 5000, default: 100)
  * @returns List of downloads
  */
-export async function get(
+export function get(
   options?: { offset?: number; page?: number; limit?: number },
 ): Promise<ApiResponse<downloads>> {
   return fetchAPI(path);
 }
 
-export async function remove(id: string): Promise<ApiResponse> {
+export function remove(id: string): Promise<ApiResponse> {
   return fetchAPI(path + "/delete/" + id, { method: "DELETE" });
 }

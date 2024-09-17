@@ -1,16 +1,10 @@
-type CustomResponse = {
-  success: boolean;
-  data?: Record<string, unknown>;
-  error?: {
-    code: number;
-    message: string;
-  };
-};
+import { ApiResponse } from "../types";
+import { getErrorMessage } from "./errorHandler";
 
 export async function fetchAPI(
   path: string,
   options: RequestInit = {},
-): Promise<Response | CustomResponse> {
+): Promise<ApiResponse<any>> {
   try {
     const url = new URL(`https://api.real-debrid.com/rest/1.0/${path}`);
 
@@ -40,6 +34,7 @@ export async function fetchAPI(
     const { error_code, error } = data;
 
     if (error_code || error) {
+      const errorMessage = getErrorMessage(path, error_code);
       return { success: false, error: { code: error_code, message: error } };
     }
 
@@ -53,13 +48,9 @@ export async function fetchAPI(
 }
 
 export function handleError(message: string, code = 500) {
-  return Response.json({ success: false, error: { code, message } }, {
-    status: code,
-  });
+  return { success: false, error: { code, message } };
 }
 
 export function handleSuccess(data?: any, code = 200) {
-  return Response.json({ success: true, ...(data && { data: data }) }, {
-    status: code,
-  });
+  return { success: true, ...(data && { data: data }) };
 }
